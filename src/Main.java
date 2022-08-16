@@ -14,13 +14,24 @@ public class Main {
         return sc.nextInt();
     }
 
+    private static void selecionarCaneta(){
+        System.out.println("Qual caneta deseja: (id)");
+        int id = sc.nextInt();
+        for (int i = 0; i < Caneta.listaCaneta.size(); i++){
+            if (Caneta.listaCaneta.get(i).getId() == id){
+                caneta = Caneta.listaCaneta.get(i);
+            }
+        }
+    }
+
     public static void destampar(){
+        selecionarCaneta();
         switch (menu()){
             case 1 -> {
-                caneta.destampar();
+                caneta.destampar(caneta);
             }
             case 2 -> {
-                caneta.tampar();
+                caneta.tampar(caneta);
             }
             case 3 -> {
                 caneta.rabiscar(caneta);
@@ -29,6 +40,5 @@ public class Main {
                 caneta.status();
             }
         }
-        menu();
     }
 }

@@ -1,40 +1,60 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Caneta {
 
     private String modelo, cor;
     private boolean tampada;
+    private int id;
 
-    ArrayList<Caneta> listaCaneta = new ArrayList<>();
+    static ArrayList<Caneta> listaCaneta = new ArrayList<>();
 
-    static{
-        Caneta caneta = new Caneta();
-        caneta.setCor("Azul");
+    static {
+        Caneta caneta = new Caneta("bic", "azul", true, 1);
+        listaCaneta.add(caneta);
+        Caneta caneta2 = new Caneta("bic", "azul", true, 2);
+        listaCaneta.add(caneta2);
+        Caneta caneta3 = new Caneta("bic", "azul", false, 3);
+        listaCaneta.add(caneta3);
     }
 
-    public void status(){
+    public Caneta(String modelo, String cor, boolean tampada, int id) {
+        this.modelo = modelo;
+        this.cor = cor;
+        this.tampada = tampada;
+        this.id = id;
+    }
+
+    public void status() {
         System.out.println("Uma caneta: " + cor);
         System.out.println("Está tampada:" + tampada);
     }
 
-    public void destampar(){
-        setTampada(false);
+    public void destampar(Caneta caneta) {
+        caneta.setTampada(false);
     }
 
-    public void tampar(){
-        setTampada(true);
+    public void tampar(Caneta caneta) {
+        caneta.setTampada(false);
     }
 
-    public void rabiscar(Caneta caneta){
-        try{
-            if(caneta.isTampada()){
+    public void rabiscar(Caneta caneta) {
+        try {
+            if (caneta.isTampada()) {
                 throw new ExceptionTampada();
+            } else {
+                System.out.println("Rabiscando!");
             }
-        }catch (Exception exception){
-            System.out.println(exception.getClass().getSimpleName() + exception.getMessage());
+        } catch (Exception exception) {
+            System.out.println("Exception: " + exception.getClass().getSimpleName() + "\nMessage: " + exception.getMessage());
         }
-        System.out.println("Rabiscando!");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getModelo() {
